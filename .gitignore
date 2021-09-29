@@ -1,3 +1,6 @@
 .DS_Store
 .idea/
 db.sqlite3
+core/setting_local.py
+config/.env
+*__pycache__*
