@@ -1,0 +1,15 @@
+[MASTER]
+max-line-length=79
+disable=
+    missing-module-docstring,
+    missing-function-docstring,
+    missing-class-docstring,
+    too-few-public-methods,
+    no-self-use,
+    bad-python3-import,
+    import-star-module-level,
+    import-error,
+    unused-import,
+    import-outside-toplevel,
+    invalid-name,
+    fixme,
