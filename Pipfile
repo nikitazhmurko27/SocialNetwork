@@ -11,6 +11,8 @@ djangorestframework-simplejwt = "*"
 pylint-django = "*"
 psycopg2-binary = "*"
 django-environ = "*"
+drf-yasg = "*"
+django-filter = "*"
 
 [dev-packages]
 

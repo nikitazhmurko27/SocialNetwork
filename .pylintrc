@@ -12,4 +12,5 @@ disable=
     unused-import,
     import-outside-toplevel,
     invalid-name,
+    R0801,
     fixme,

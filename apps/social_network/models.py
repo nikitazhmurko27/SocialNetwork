@@ -22,7 +22,7 @@ class Post(models.Model):
 
 class PostAuthorLike(models.Model):
     post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="post_users"
+        Post, on_delete=models.CASCADE, related_name="post_authors_likes"
     )
     author = models.ForeignKey(
         User,
