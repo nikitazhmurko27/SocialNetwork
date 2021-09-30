@@ -4,3 +4,4 @@ db.sqlite3
 core/setting_local.py
 config/.env
 *__pycache__*
+.pytest_cache
