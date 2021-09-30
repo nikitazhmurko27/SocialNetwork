@@ -13,4 +13,5 @@ disable=
     import-outside-toplevel,
     invalid-name,
     R0801,
+    W0613,
     fixme,

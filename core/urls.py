@@ -24,6 +24,8 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+from apps.social_network.views import UserCreate
+
 schema_view = get_schema_view(
     openapi.Info(
         title="Snippets API",
@@ -61,4 +63,5 @@ urlpatterns = [
         schema_view.with_ui("redoc", cache_timeout=0),
         name="schema-redoc",
     ),
+    path("users/", UserCreate.as_view(), name="user_create"),
 ]

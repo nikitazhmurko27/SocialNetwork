@@ -1,6 +1,8 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from apps.social_network.models import Post, PostAuthorLike
+from apps.social_network.services import UserModelService
 
 
 class PostAuthorSerializer(serializers.ModelSerializer):
@@ -28,3 +30,15 @@ class PostSerializer(serializers.ModelSerializer):
         user = self.context["request"].user
         post = Post.objects.create(author=user, **validated_data)
         return post
+
+
+class CreateUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["email", "username", "password"]
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def create(self, validated_data):
+        service = UserModelService(validated_data)
+        user = service.create()
+        return user
