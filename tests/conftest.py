@@ -1,7 +1,7 @@
 import pytest
 from django.contrib.auth.models import User
 
-from apps.social_network.models import Post, PostAuthorLike
+from apps.social_network.models import Post
 
 
 @pytest.fixture
@@ -48,7 +48,10 @@ def liked_post():
     )
     user.save()
     post = Post.objects.create(
-        author=user, title="test007", content="test content007"
+        author=user,
+        title="test007",
+        content="test content007",
     )
-    PostAuthorLike.objects.create(post=post, author=user)
+    post.likes.add(user)
+    post.save()
     return post

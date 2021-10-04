@@ -18,12 +18,6 @@ from django.urls import include, path, re_path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
-
-from apps.social_network.views import UserCreate
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -41,12 +35,8 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("social_network/", include("apps.social_network.urls")),
-    path(
-        "api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"
-    ),
-    path(
-        "api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"
-    ),
+    path("users/", include("apps.users.urls")),
+    path("api/token/", include("core.auth_urls")),
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",
         schema_view.without_ui(cache_timeout=0),
@@ -62,5 +52,4 @@ urlpatterns = [
         schema_view.with_ui("redoc", cache_timeout=0),
         name="schema-redoc",
     ),
-    path("users/", UserCreate.as_view(), name="user_create"),
 ]

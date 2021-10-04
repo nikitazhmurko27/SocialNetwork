@@ -11,20 +11,10 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name="posts",
     )
-    likes = models.ManyToManyField(User, through="PostAuthorLike")
+    likes = models.ManyToManyField(User, related_name="post_authors_likes")
 
     class Meta:
         ordering = ["-created_at"]
 
     def __str__(self):
         return self.title
-
-
-class PostAuthorLike(models.Model):
-    post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="post_authors_likes"
-    )
-    author = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-    )

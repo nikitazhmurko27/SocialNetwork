@@ -1,15 +1,12 @@
 from django.db.models import Count
+from django.shortcuts import get_object_or_404
 from rest_framework import filters, generics, mixins
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.social_network.models import Post
 from apps.social_network.permissions import IsActiveUser
-from apps.social_network.serializers import (
-    CreateUserSerializer,
-    PostSerializer,
-)
+from apps.social_network.serializers import PostSerializer
 from apps.social_network.services import PostAuthorLikeModelService
 
 
@@ -42,7 +39,7 @@ class PostLike(APIView):
     permission_classes = [IsActiveUser]
 
     def get_object(self, pk):
-        return Post.objects.get(pk=pk)
+        return get_object_or_404(Post, pk=pk)
 
     def patch(self, request, pk):
         post_object = self.get_object(pk)
@@ -55,11 +52,3 @@ class PostLike(APIView):
             service.set_like(post_object)
             return Response(serializer.data)
         return Response("wrong parameters")
-
-
-class UserCreate(mixins.CreateModelMixin, generics.GenericAPIView):
-    serializer_class = CreateUserSerializer
-    permission_classes = [AllowAny]
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)

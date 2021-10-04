@@ -42,6 +42,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "apps.social_network.apps.SocialNetworkConfig",
+    "apps.users.apps.UsersConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -90,7 +91,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": env("DB_ENGINE"),
         "NAME": env("DB_NAME"),
         "USER": env("DB_USER"),
         "PASSWORD": env("DB_PASS"),
@@ -163,11 +164,6 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-try:
-    from .setting_local import *
-except ImportError as e:
-    print(e)
 
 INTERNAL_IPS = [
     "127.0.0.1",
